@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>reg-test</title>
+</head>
+<body>
+    <textarea name="textarea" id="text" cols="30" rows="10"></textarea>
+    <button onClick="getValue()">获取textarea值</button>
+    <script>
+      function getValue() {
+        let textValue = window.document.getElementById("text").value
+        const singleReg = /^'([^\r\n\'\\]|\\[\s\S])*'$/g 
+        const doubleReg = /^"[^\r\n\"\\]|\\[\s\S]*"$/g 
+        console.log(doubleReg.exec(textValue));
+      }
+      // 注释：用于查看原生字符串形态的测试例子
+      
+
+
+      //String Number Literal 字面值
+      //Boolean null undefined(不是字面值，是变量) Symbol
+      //BigInt Object
+
+
+      //关键字
+      // functino try catch finlly let const var
+      // break continue class switch async await thisextends for super
+      // return typeof instanceof do while in delete
+      //throw void
+
+      //符号 Punctuators
+      //非运算符 ; , "" '' {} [] () 
+      //一元运算符 + - 
+      //二元运算符 operator + / * / % 
+      //位运算符 ^ | & ~
+      //逻辑运算 ! || &&
+      //赋值运算符 &&= &= ||= |=
+      //比较运算符 >= <= == === != !==
+
+      //identifier
+      const identifierReg = /^_|$|[a-z][A-Z]$/g
+    </script>
+</body>
+</html>

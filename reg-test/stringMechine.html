@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>stringMechine</title>
+  </head>
+  <body>
+    <textarea id="text" cols="30" rows="10"></textarea>
+    <button onClick="run()">run</button>
+  </body>
+  <script>
+    function start(ch) {
+      if (ch === `'`) {
+        return singleQuatation;
+      } else if (ch === `"`) {
+        return doubleQuatation;
+      } 
+      return error
+    }
+    /** @description 单引号 */
+    function singleQuatation(ch) {
+      const reg = /[0-9a-zA-Z"]/;
+      if (reg.test(ch)) {
+        return singleQuatation;
+      } else if (ch === `\\`) {
+        return tarnsferMeaning1;
+      } else if (ch === `'`) {
+        return end;
+      }
+      return error;
+    }
+    /** @description 双引号 */
+    function doubleQuatation(ch) {
+      const reg = /[0-9a-zA-Z']/;
+      if (reg.test(ch)) {
+        return doubleQuatation;
+      } else if (ch === `\\`) {
+        return tarnsferMeaning2;
+      } else if (ch === `"`) {
+        return end;
+      }
+      return error;
+    }
+    /**@description 转义 */
+    function tarnsferMeaning1(ch) {
+      return singleQuatation;
+    }
+    function tarnsferMeaning2(ch) {
+      return doubleQuatation;
+    }
+    function error(ch) {
+      return error;
+    }
+    function end(ch) {
+      if (ch === EOF) {
+        return success;
+      }
+      return error;
+    }
+    function success(ch) {
+      return error;
+    }
+    const EOF = Symbol("EOF");
+
+    function run() {
+      const str = text.value;
+      let fn = start;
+      for (const ch of str) {
+        console.log(`name:${fn.name}`);
+        console.log(`ch:${ch}`);
+        fn = fn(ch);
+      }
+      fn(EOF);
+    }
+  </script>
+</html>
